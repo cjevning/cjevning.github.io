@@ -59,7 +59,7 @@
 .Social-container {
   max-width: 30%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: 2% auto;
 }
 
@@ -77,6 +77,7 @@
   border: 1px solid lightgray;
   padding: 1em;
   margin: 1em auto;
+  box-sizing: border-box;
 }
 
 .socialIcon, .link {
@@ -84,7 +85,7 @@
 }
 
 .stackItem {
-  margin: 0 2px;
+  margin: 2px;
   color: #179494;
   padding: 2px;
   border: 1px solid #179494;
@@ -97,6 +98,16 @@
     overflow: hidden;
     border-radius: 50%;
     margin: 0 auto;
+}
+
+.projectStack {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+
+.projectHeader {
+  display: flex;
 }
 
 .avatar {
@@ -142,6 +153,23 @@
   #projects, #about {
     padding-left: 5%;
     padding-right: 5%;
+  }
+
+  .projectHeader {
+    flex-direction: column;
+  }
+
+  .projectStack {
+    justify-content: space-around;
+    margin: .25em 0;
+  }
+
+  .headerMainLink > span {
+    display: none;
+  }
+
+  .Social-container {
+    max-width: 100%;
   }
 
 }

@@ -14,7 +14,7 @@ const ExperienceCard = (props) => (
       <span style={{ flexGrow: 1, textAlign: 'right' }}>{props.start} - {props.end}</span>
     </div>
     <div style={{ textAlign: 'left' }}>{props.title}</div>
-    <div style={{ display: 'flex', marginTop: '1em', justifyContent: 'space-around' }}>
+    <div style={{ display: 'flex', marginTop: '1em', justifyContent: 'space-around', flexWrap: 'wrap' }}>
       {props.stack.map(item =>
         <div className="stackItem">{item}</div>
       )}
@@ -28,7 +28,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <div className="spacer headerContent">
-            <a href="/" className="headerMainLink">Conner Jevning</a>
+            <a href="/" className="headerMainLink">C<span>onner </span>J<span>evning</span></a>
             <div className="headerLinks">
               <a href="#about">About</a>
               <a href="#experience">Experience</a>
@@ -44,8 +44,8 @@ class App extends Component {
           </div>
           <div className="section" id="about">
             <h3>About Me</h3>
-            <p>I'm a full-stack developer with 4+ years of experience currently seeking a Senior Software Engineer role in the Bay Area. My main expertise is in scalable frontend development using React, which I've previously done for both large organizations as well as fledgling startups.</p>
-            <p>As a software engineer, I love to blend my background in human-computer interaction and passion for efficiency with my lifelong love of building, creating, and fixing things. I love being able to create strong, intuitive, and lasting products that people love. I'm mainly interested in a senior development role where I can use my skills to help guide a team while contining to build experience in project management and product architecture.</p>
+            <p>I'm a full-stack developer with 4+ years of experience currently seeking a Senior Software or Founding Engineer role in the Bay Area. My main expertise is in scalable frontend development using React, which I've previously done for both large organizations as well as fledgling startups.</p>
+            <p>As a software engineer, I blend my background in human-computer interaction and passion for efficiency with my lifelong zeal for building, creating, and fixing things. I love being able to create strong, intuitive, and lasting products that people can intuitively connect with. I'm mainly interested in a senior development role where I can use my skills to help guide a team while contining to build experience in project management and product architecture.</p>
             <p>When I'm not coding, you'll most likely find me gaming, golfing, surfing music sites, watching basketball, or tinkering away on a project.</p>
           </div>
           <div className="section" id="experience">
@@ -59,9 +59,9 @@ class App extends Component {
             <h3>Side Projects</h3>
             {data.projects.map((proj) =>
               <div style={{ width: '100%' }}>
-                <div style={{ display: 'flex' }}>
+                <div className="projectHeader">
                   <a className="link" href={proj.link}>{proj.title} <FontAwesomeIcon icon={faArrowRight} /></a>
-                  <div style={{ display: 'flex', flexGrow: 1, justifyContent: 'flex-end' }}>{proj.stack.map(item => <div className="stackItem">{item}</div>)}</div>
+                  <div className="projectStack">{proj.stack.map(item => <div className="stackItem">{item}</div>)}</div>
                 </div>
                 <p style={{ textAlign: 'left' }}>{proj.desc}</p>
               </div>
