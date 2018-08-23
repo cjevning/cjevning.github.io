@@ -10,11 +10,17 @@
 .App-header {
   background-color: #222;
   color: white;
+  padding: 0.5%;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 .headerMainLink {
   font-size: 1.5em;
   text-decoration: none;
+  text-align: left;
+  color: inherit;
 }
 
 .headerContent {
@@ -24,10 +30,17 @@
 .headerLinks > a {
   text-decoration: none;
   margin: 0 4px;
+  color: inherit;
+}
+
+.headerMainLink:hover, .headerLinks > a:hover {
+  color: #179494;
 }
 
 .headerLinks {
-  /*flex: 1;*/
+  align-self: center;
+  text-align: right;
+  flex-grow: 1;
 }
 
 .App-title {
@@ -50,9 +63,86 @@
 }
 
 .spacer {
-  width: 100%;
-  height: 100%;
   margin: 0 15%;
+}
+
+.content {
+  margin-top: 3em;
+}
+
+.experienceItem {
+  width: 40%;
+  margin: 0 auto;
+  border: 1px solid lightgray;
+  padding: 1em;
+  margin: 1em auto;
+}
+
+.socialIcon, .link {
+  color: #941717;
+}
+
+.stackItem {
+  margin: 0 2px;
+  color: #179494;
+  padding: 2px;
+  border: 1px solid #179494;
+}
+
+.avatarContainer {
+    width: 200px;
+    height: 200px;
+    /*position: relative;*/
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.avatar {
+    display: inline;
+    margin: 0 auto;
+    height: auto;
+    width: 120%;
+}
+
+.section {
+  padding: 3em 0;
+}
+
+.section:nth-child(even) {
+  background: lightgray;
+}
+
+#projects {
+  padding-left: 30%;
+  padding-right: 30%;
+}
+
+.resume {
+  margin: 2em auto 0;
+  font-size: 1.25em;
+}
+
+#about {
+  padding-left: 30%;
+  padding-right: 30%;
+}
+
+@media only screen and (max-width: 600px) {
+
+  .spacer {
+    margin: 0 5%;
+  }
+
+  .experienceItem {
+    width: 90%;
+  }
+
+  #projects, #about {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
 }
 
 @keyframes App-logo-spin {

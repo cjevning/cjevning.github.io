@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBasketballBall, faStopwatch, faBan } from '@fortawesome/free-solid-svg-icons';
+import { faBasketballBall, faStopwatch, faBan, faArrowRight, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faLinkedin, faTwitter, faGithub } from '@fortawesome/free-brands-svg-icons';
 import data from './data';
 import avatar from './1.jpg';
@@ -8,15 +8,17 @@ import resume from './Resume.pdf';
 import './App.css';
 
 const ExperienceCard = (props) => (
-  <div>
-    <h4>
-      <div>
-        <a href={props.website}>{props.company}</a>
-        <span>{props.start} - {props.end}</span>
-      </div>
-      <span>{props.title}</span>
-      <div>{props.stack.map(item => <div>{item}</div>)}</div>
-    </h4>
+  <div className="experienceItem">
+    <div style={{ display: 'flex' }}>
+      <a className="link" href={props.website}>{props.company}</a>
+      <span style={{ flexGrow: 1, textAlign: 'right' }}>{props.start} - {props.end}</span>
+    </div>
+    <div style={{ textAlign: 'left' }}>{props.title}</div>
+    <div style={{ display: 'flex', marginTop: '1em', justifyContent: 'space-around' }}>
+      {props.stack.map(item =>
+        <div className="stackItem">{item}</div>
+      )}
+    </div>
   </div>
 );
 
@@ -35,38 +37,52 @@ class App extends Component {
             </div>
           </div>
         </header>
-        <div>
-          <FontAwesomeIcon className="App-logo" icon={faBasketballBall} size="4x" color="orange" />
-          <h1 className="App-title">Hello, I'm Conner</h1>
-          <img src={avatar} />
-        </div>
-        <div id="about">
-          <h3>About</h3>
-          <p>I'm currently seeking a Senior Software Engineer role with high impact and the chance to build some awesome tools.</p>
-          <p>As a software engineer, I love to blend my background in Human-computer interaction and passion for efficiency with my lifelong love of building, creating, and fixing things to create strong, intuitive, and lasting products that people love.</p>
-          <p>When I'm not in front of a computer screen, I'm probably gaming, golfing, surfing music sites, or watching basketball.</p>
-        </div>
-        <div id="experience">
-          <h3>Experience</h3>
-          {data.experience.map((exp) => <ExperienceCard {...exp} />)}
-          <a href={resume}>View Resume</a>
-        </div>
-        <div id="projects">
-          <h3>Projects</h3>
-          {data.projects.map((proj) => <div><a href={proj.link}>{proj.title}</a><p>{proj.desc}</p><div>{proj.stack.map(item => <div>{item}</div>)}</div></div>)}
-        </div>
-        <div id="connect">
-          <h3>Connect</h3>
-          <div className="Social-container">
-            <a href="https://linkedin.com/in/cjevning">
-              <FontAwesomeIcon icon={faLinkedin} size="2x" color="whitesmoke" />
-            </a>
-            <a href="https://twitter.com/cjevning">
-              <FontAwesomeIcon icon={faTwitter} size="2x" color="whitesmoke" />
-            </a>
-            <a href="https://github.com/cjevning">
-              <FontAwesomeIcon icon={faGithub} size="2x" color="whitesmoke" />
-            </a>
+        <div className="content">
+          <div className="section">
+            <div className="avatarContainer"><img className="avatar" src={avatar} /></div>
+            <h1 className="App-title">Hello world, I'm Conner</h1>
+          </div>
+          <div className="section" id="about">
+            <h3>About Me</h3>
+            <p>I'm a full-stack developer with 4+ years of experience currently seeking a Senior Software Engineer role in the Bay Area. My main expertise is in scalable frontend development using React, which I've previously done for both large organizations as well as fledgling startups.</p>
+            <p>As a software engineer, I love to blend my background in human-computer interaction and passion for efficiency with my lifelong love of building, creating, and fixing things. I love being able to create strong, intuitive, and lasting products that people love. I'm mainly interested in a senior development role where I can use my skills to help guide a team while contining to build experience in project management and product architecture.</p>
+            <p>When I'm not coding, you'll most likely find me gaming, golfing, surfing music sites, watching basketball, or tinkering away on a project.</p>
+          </div>
+          <div className="section" id="experience">
+            <h3>Prior Experience</h3>
+            {data.experience.map((exp) => <ExperienceCard {...exp} />)}
+            <div className="resume">
+              <a className="link" href={resume} style={{ margin: '2em auto' }}>View Resume <FontAwesomeIcon icon={faArrowRight} /></a>
+            </div>
+          </div>
+          <div className="section" id="projects">
+            <h3>Side Projects</h3>
+            {data.projects.map((proj) =>
+              <div style={{ width: '100%' }}>
+                <div style={{ display: 'flex' }}>
+                  <a className="link" href={proj.link}>{proj.title} <FontAwesomeIcon icon={faArrowRight} /></a>
+                  <div style={{ display: 'flex', flexGrow: 1, justifyContent: 'flex-end' }}>{proj.stack.map(item => <div className="stackItem">{item}</div>)}</div>
+                </div>
+                <p style={{ textAlign: 'left' }}>{proj.desc}</p>
+              </div>
+            )}
+          </div>
+          <div className="section" id="connect">
+            <h3>Connect</h3>
+            <div className="Social-container">
+              <a href="https://linkedin.com/in/cjevning">
+                <FontAwesomeIcon icon={faLinkedin} size="2x" className="socialIcon" />
+              </a>
+              <a href="https://twitter.com/cjevning">
+                <FontAwesomeIcon icon={faTwitter} size="2x" className="socialIcon" />
+              </a>
+              <a href="https://github.com/cjevning">
+                <FontAwesomeIcon icon={faGithub} size="2x" className="socialIcon" />
+              </a>
+              <a href="mailto:cjevning@gmail.com">
+                <FontAwesomeIcon icon={faEnvelope} size="2x" className="socialIcon" />
+              </a>
+            </div>
           </div>
         </div>
       </div>
