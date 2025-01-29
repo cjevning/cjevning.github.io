@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { useWindowSize } from "usehooks-ts";
 
 const BRICK_ROWS = 5;
@@ -19,14 +19,9 @@ export interface Brick {
 
 export function useBricks(minCols = 3) {
   const { width = 0 } = useWindowSize();
-
-  const [bricks, setBricks] = useState<Brick[]>([]);
-  const totalBricksRef = useRef(0);
-  const destroyedBricksRef = useRef(0);
+  const bricksRef = useRef<Brick[]>([]);
 
   useEffect(() => {
-    // Move brick creation logic here
-
     const BRICK_COLS =
       width < 500 ? minCols : width < 1000 ? minCols + 2 : minCols + 6;
     const BRICK_WIDTH = (width * 0.95) / BRICK_COLS;
@@ -49,14 +44,8 @@ export function useBricks(minCols = 3) {
       }
     }
 
-    setBricks(bricks);
-    totalBricksRef.current = bricks.length;
-    destroyedBricksRef.current = 0;
+    bricksRef.current = bricks;
   }, [width, minCols]);
 
-  return {
-    bricks,
-    totalBricksRef,
-    destroyedBricksRef,
-  };
+  return bricksRef;
 }

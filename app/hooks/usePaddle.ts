@@ -5,6 +5,7 @@ export interface Paddle {
   y: number;
   width: number;
   height: number;
+  moveTo: (targetX: number, width: number) => void;
 }
 
 export function usePaddle(width: number, height: number) {
@@ -13,21 +14,10 @@ export function usePaddle(width: number, height: number) {
     y: height - 50,
     width: 100,
     height: 20,
+    moveTo(targetX: number, canvasWidth: number) {
+      this.x = Math.max(0, Math.min(canvasWidth - this.width, targetX));
+    },
   });
 
-  const movePaddleTo = (targetX: number) => {
-    const newX = Math.max(
-      0,
-      Math.min(width - paddleRef.current.width, targetX)
-    );
-    paddleRef.current = {
-      ...paddleRef.current,
-      x: newX,
-    };
-  };
-
-  return {
-    paddleRef,
-    movePaddleTo,
-  };
+  return paddleRef;
 }

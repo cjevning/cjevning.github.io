@@ -5,7 +5,7 @@ import { MAX_BRICK_POINTS, useBricks } from "./hooks/useBricks";
 import { useBall } from "./hooks/useBall";
 import { usePaddle } from "./hooks/usePaddle";
 import { useGameLoop } from "./hooks/useGameLoop";
-import { useBreakoutLogic } from "./hooks/useBreakoutLogic";
+import { useBreakoutFrame } from "./hooks/useBreakoutFrame";
 import Link from "next/link";
 
 interface Props {
@@ -20,52 +20,32 @@ export default function Breakout({ children }: Props) {
   const { width = 0, height = 0 } = useWindowSize();
   const isClient = useIsClient();
 
-  // const [navLinks, setNavLinks] = useState<
-  //   Array<{
-  //     x: number;
-  //     y: number;
-  //     width: number;
-  //     height: number;
-  //     link: string;
-  //     visible: boolean;
-  //   }>
-  // >([]);
-
-  const {
-    totalBricksRef,
-    destroyedBricksRef,
-    bricks,
-    // updateNavLinks
-  } = useBricks(links.length);
-  const { paddleRef, movePaddleTo } = usePaddle(width, height);
-  const { ballRef, updateBallSpeed, moveBall } = useBall();
+  const bricksRef = useBricks(links.length);
+  const paddleRef = usePaddle(width, height);
+  const ballRef = useBall();
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const { drawGame } = useBreakoutLogic({
+  const { drawFrame } = useBreakoutFrame({
     canvasRef,
     ballRef,
-    moveBall,
     paddleRef,
-    bricks,
-    movePaddleTo,
-    updateBallSpeed,
-    destroyedBricksRef,
-    totalBricksRef,
+    bricksRef,
     scoreRef,
     setGameOver,
+    width,
   });
 
   useGameLoop({
     isRunning: !gameOver,
-    drawGame,
+    drawGame: drawFrame,
   });
 
   if (!isClient) {
     return null;
   }
 
-  const topRowBricks = bricks.filter(
+  const topRowBricks = bricksRef.current.filter(
     (brick) => brick.points === MAX_BRICK_POINTS
   );
   const middleTopBricks = topRowBricks.slice(
