@@ -25,8 +25,6 @@ export default function Breakout({ children }: { children: React.ReactNode }) {
       const ctx = canvas.getContext("2d")!;
       if (!ctx) return;
 
-      console.log("drawing");
-
       // Clear canvas
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 

@@ -1,24 +1,33 @@
-interface Paddle {
+import { useRef } from "react";
+
+export interface Paddle {
   x: number;
+  y: number;
   width: number;
   height: number;
 }
 
 export function usePaddle(width: number, height: number) {
-  const createPaddle = (canvasWidth: number) => {
-    const PADDLE_WIDTH = width * 0.15;
-    const PADDLE_HEIGHT = height * 0.015;
+  const paddleRef = useRef<Paddle>({
+    x: width / 2 - 50,
+    y: height - 50,
+    width: 100,
+    height: 20,
+  });
 
-    const paddle: Paddle = {
-      x: canvasWidth / 2 - PADDLE_WIDTH / 2,
-      width: PADDLE_WIDTH,
-      height: PADDLE_HEIGHT,
+  const movePaddleTo = (targetX: number) => {
+    const newX = Math.max(
+      0,
+      Math.min(width - paddleRef.current.width, targetX)
+    );
+    paddleRef.current = {
+      ...paddleRef.current,
+      x: newX,
     };
-
-    return paddle;
   };
 
   return {
-    createPaddle,
+    paddleRef,
+    movePaddleTo,
   };
 }
