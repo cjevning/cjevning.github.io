@@ -30,7 +30,7 @@ export function useBreakoutFrame({
   updateIndicators,
 }: BreakoutFrameProps) {
   const { width = 0, height = 0 } = useWindowSize();
-  const BASE_SPEED = 7;
+  const BASE_SPEED = width < 640 ? 3 : 7;
 
   function createScoreIndicator(x: number, y: number, value: number) {
     addIndicator(x, y, value);
