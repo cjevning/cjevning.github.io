@@ -1,7 +1,7 @@
 import { Ball } from "../hooks/useBall";
 import { Brick } from "../hooks/useBricks";
 import { Paddle } from "../hooks/usePaddle";
-import { ScoreIndicator } from "../hooks/useBreakoutFrame";
+import { ScoreIndicator } from "../hooks/useScoreIndicators";
 
 interface DrawContext {
   ctx: CanvasRenderingContext2D;
