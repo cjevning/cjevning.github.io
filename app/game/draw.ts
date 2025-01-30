@@ -48,7 +48,6 @@ export function drawGame({
   drawBall(ctx, ball);
 
   // Draw score indicators
-  ctx.textAlign = "center";
   ctx.font = "16px Arial";
 
   scoreIndicators.forEach((indicator) => {
