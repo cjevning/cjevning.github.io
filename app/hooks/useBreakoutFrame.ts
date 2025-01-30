@@ -127,8 +127,35 @@ export function useBreakoutFrame({
     }
   }
 
-  function handlePaddleMovement(position: { x: number }) {
-    paddleRef.current.moveTo(position.x - paddleRef.current.width / 2, width);
+  function handlePaddleMovement() {
+    const paddleY = height - paddleRef.current.height - 30;
+    const timeToIntercept = (paddleY - ballRef.current.y) / ballRef.current.dy;
+
+    // Only move if ball is moving downward
+    if (ballRef.current.dy > 0) {
+      // Calculate future position considering wall bounces
+      let futureX = ballRef.current.x + ballRef.current.dx * timeToIntercept;
+      let dx = ballRef.current.dx;
+
+      // Check if ball will hit walls before reaching paddle
+      while (futureX < 0 || futureX > width) {
+        if (futureX < 0) {
+          futureX = -futureX; // Reflect from left wall
+          dx = -dx;
+        } else if (futureX > width) {
+          futureX = 2 * width - futureX; // Reflect from right wall
+          dx = -dx;
+        }
+      }
+
+      // Calculate target position with the corrected future X
+      const targetX = futureX - paddleRef.current.width / 2;
+      const distance = targetX - paddleRef.current.x;
+      const moveSpeed = distance / timeToIntercept;
+      const newX = paddleRef.current.x + moveSpeed;
+
+      paddleRef.current.moveTo(newX, width);
+    }
   }
 
   const drawFrame = () => {
@@ -140,7 +167,7 @@ export function useBreakoutFrame({
 
     handleBrickCollisions();
     handleWallCollisions(canvas);
-    handlePaddleMovement({ x: ballRef.current.x });
+    handlePaddleMovement();
 
     // Move ball
     const newX = ballRef.current.x + ballRef.current.dx;

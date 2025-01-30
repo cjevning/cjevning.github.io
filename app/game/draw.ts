@@ -29,14 +29,14 @@ export function drawGame({
   // Draw bricks
   drawBricks(ctx, bricks);
 
-  // Check for win condition
-  if (destroyedBricks === totalBricks) {
-    drawWinMessage(ctx, canvas, paddle);
-    return;
-  }
-
   // Draw score
   drawScore(ctx, canvas, score);
+
+  // Check for win condition and draw win message next to score
+  if (destroyedBricks === totalBricks) {
+    drawWinMessage(ctx, canvas);
+    return;
+  }
 
   // Draw paddle
   drawPaddle(ctx, paddle, canvas.height);
@@ -79,18 +79,12 @@ function drawBricks(ctx: CanvasRenderingContext2D, bricks: Brick[]) {
 
 function drawWinMessage(
   ctx: CanvasRenderingContext2D,
-  canvas: HTMLCanvasElement,
-  paddle: Paddle
+  canvas: HTMLCanvasElement
 ) {
-  ctx.font = `${canvas.width * 0.04}px Arial`;
+  ctx.font = `18px Arial`;
   ctx.fillStyle = "#2ed573";
   const winText = "Winner!";
-  const textMetrics = ctx.measureText(winText);
-  ctx.fillText(
-    winText,
-    canvas.width / 2 - textMetrics.width / 2,
-    canvas.height - paddle.height - 60
-  );
+  ctx.fillText(winText, 10, canvas.height - 10);
 }
 
 function drawScore(
@@ -98,7 +92,7 @@ function drawScore(
   canvas: HTMLCanvasElement,
   score: number
 ) {
-  ctx.font = `${canvas.width * 0.02}px Arial`;
+  ctx.font = `18px Arial`;
   ctx.fillStyle = "#2ed573";
   const scoreText = `Score: ${score}`;
   const scoreMetrics = ctx.measureText(scoreText);

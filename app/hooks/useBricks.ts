@@ -3,7 +3,7 @@ import { useWindowSize } from "usehooks-ts";
 
 const BRICK_ROWS = 5;
 export const MAX_BRICK_POINTS = 5;
-const colors = ["#0066cc", "#ff4757", "#2ed573", "#ffa502", "#5352ed"];
+const colors = ["#0066cc", "#ff4757", "#2ed573", "#ffa502", "#9c27b0"];
 
 export interface Brick {
   x: number;

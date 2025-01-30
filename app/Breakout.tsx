@@ -21,7 +21,7 @@ export default function Breakout({ children }: Props) {
   const isClient = useIsClient();
 
   const bricksRef = useBricks(links.length);
-  const paddleRef = usePaddle(width, height);
+  const paddleRef = usePaddle();
   const ballRef = useBall();
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -72,11 +72,18 @@ export default function Breakout({ children }: Props) {
             width: middleTopBricks[index].width,
             height: middleTopBricks[index].height,
           }}
+          onClick={() => {
+            const brick = middleTopBricks[index];
+            bricksRef.current = bricksRef.current.map((b) =>
+              b === brick ? { ...b, visible: false } : b
+            );
+            scoreRef.current += brick.points;
+          }}
         >
           {link.replace("/", "")}
         </Link>
       ))}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-7">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         {children}
       </div>
     </div>

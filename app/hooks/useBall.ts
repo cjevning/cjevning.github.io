@@ -23,7 +23,7 @@ export interface Ball {
 
 export function useBall() {
   const { width = 0, height = 0 } = useWindowSize();
-  const BALL_RADIUS = Math.min(width / 25, 10);
+  const BALL_RADIUS = Math.min(width / 25, 15);
 
   const calculateHitbox = (position: Point): Hitbox => {
     const cornerOffset = BALL_RADIUS * 0.707;
