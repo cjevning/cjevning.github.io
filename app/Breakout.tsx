@@ -7,6 +7,7 @@ import { usePaddle } from "./hooks/usePaddle";
 import { useGameLoop } from "./hooks/useGameLoop";
 import { useBreakoutFrame } from "./hooks/useBreakoutFrame";
 import Link from "next/link";
+import { useScoreIndicators } from "./hooks/useScoreIndicators";
 
 interface Props {
   children: React.ReactNode;
@@ -16,6 +17,7 @@ const links = ["/about", "/experience", "/connect"];
 
 export default function Breakout({ children }: Props) {
   const [gameOver, setGameOver] = useState(false);
+  const { indicators, addIndicator, updateIndicators } = useScoreIndicators();
   const scoreRef = useRef(0);
   const isClient = useIsClient();
   const { width = 0, height = 0 } = useWindowSize();
@@ -33,6 +35,9 @@ export default function Breakout({ children }: Props) {
     bricksRef,
     scoreRef,
     setGameOver,
+    indicators,
+    addIndicator,
+    updateIndicators,
   });
 
   useGameLoop({
@@ -78,6 +83,11 @@ export default function Breakout({ children }: Props) {
                 b === brick ? { ...b, visible: false } : b
               );
               scoreRef.current += brick.points;
+              addIndicator(
+                brick.x + brick.width / 2,
+                brick.y + brick.height / 2,
+                brick.points
+              );
             }}
           >
             {link.replace("/", "")}

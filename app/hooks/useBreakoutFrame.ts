@@ -4,6 +4,7 @@ import { Brick } from "./useBricks";
 import { Paddle } from "./usePaddle";
 import { drawGame as drawBreakoutGame } from "../game/draw";
 import { useWindowSize } from "usehooks-ts";
+import { ScoreIndicator } from "./useScoreIndicators";
 
 interface BreakoutFrameProps {
   canvasRef: RefObject<HTMLCanvasElement | null>;
@@ -12,6 +13,9 @@ interface BreakoutFrameProps {
   bricksRef: MutableRefObject<Brick[]>;
   scoreRef: MutableRefObject<number>;
   setGameOver: (value: boolean) => void;
+  indicators: ScoreIndicator[];
+  addIndicator: (x: number, y: number, value: number) => void;
+  updateIndicators: () => void;
 }
 
 export function useBreakoutFrame({
@@ -21,9 +25,16 @@ export function useBreakoutFrame({
   bricksRef,
   scoreRef,
   setGameOver,
+  indicators,
+  addIndicator,
+  updateIndicators,
 }: BreakoutFrameProps) {
   const { width = 0, height = 0 } = useWindowSize();
   const BASE_SPEED = 7;
+
+  function createScoreIndicator(x: number, y: number, value: number) {
+    addIndicator(x, y, value);
+  }
 
   function handleBrickCollisions() {
     bricksRef.current.forEach((brick) => {
@@ -52,6 +63,11 @@ export function useBreakoutFrame({
 
         brick.visible = false;
         scoreRef.current += brick.points;
+        createScoreIndicator(
+          brick.x + brick.width / 2,
+          brick.y + brick.height / 2,
+          brick.points
+        );
 
         // Update ball speed based on progress
         const totalBricks = bricksRef.current.length;
@@ -167,7 +183,7 @@ export function useBreakoutFrame({
     handleWallCollisions(canvas);
     handlePaddleMovement();
 
-    // Move ball
+    // Update ball position
     const newX = ballRef.current.x + ballRef.current.dx;
     const newY = ballRef.current.y + ballRef.current.dy;
     ballRef.current = {
@@ -176,6 +192,9 @@ export function useBreakoutFrame({
       y: newY,
       hitbox: ballRef.current.calculateHitbox({ x: newX, y: newY }),
     };
+
+    // Update score indicators
+    updateIndicators();
 
     // Draw the game state
     drawBreakoutGame({
@@ -187,6 +206,7 @@ export function useBreakoutFrame({
       score: scoreRef.current,
       destroyedBricks: bricksRef.current.filter((b) => !b.visible).length,
       totalBricks: bricksRef.current.length,
+      scoreIndicators: indicators,
     });
   };
 

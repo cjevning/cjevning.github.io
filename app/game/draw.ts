@@ -1,6 +1,7 @@
 import { Ball } from "../hooks/useBall";
 import { Brick } from "../hooks/useBricks";
 import { Paddle } from "../hooks/usePaddle";
+import { ScoreIndicator } from "../hooks/useBreakoutFrame";
 
 interface DrawContext {
   ctx: CanvasRenderingContext2D;
@@ -11,6 +12,7 @@ interface DrawContext {
   score: number;
   destroyedBricks: number;
   totalBricks: number;
+  scoreIndicators: ScoreIndicator[];
 }
 
 export function drawGame({
@@ -22,6 +24,7 @@ export function drawGame({
   score,
   destroyedBricks,
   totalBricks,
+  scoreIndicators,
 }: DrawContext) {
   // Clear canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -43,6 +46,15 @@ export function drawGame({
 
   // Draw ball
   drawBall(ctx, ball);
+
+  // Draw score indicators
+  ctx.textAlign = "center";
+  ctx.font = "16px Arial";
+
+  scoreIndicators.forEach((indicator) => {
+    ctx.fillStyle = `rgba(255, 255, 255, ${indicator.opacity})`;
+    ctx.fillText(`+${indicator.value}`, indicator.x, indicator.y);
+  });
 }
 
 function drawBricks(ctx: CanvasRenderingContext2D, bricks: Brick[]) {
