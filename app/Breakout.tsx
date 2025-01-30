@@ -1,6 +1,6 @@
 "use client";
 import { useRef, useState } from "react";
-import { useWindowSize, useIsClient } from "usehooks-ts";
+import { useIsClient, useWindowSize } from "usehooks-ts";
 import { MAX_BRICK_POINTS, useBricks } from "./hooks/useBricks";
 import { useBall } from "./hooks/useBall";
 import { usePaddle } from "./hooks/usePaddle";
@@ -17,8 +17,8 @@ const links = ["/about", "/experience", "/connect"];
 export default function Breakout({ children }: Props) {
   const [gameOver, setGameOver] = useState(false);
   const scoreRef = useRef(0);
-  const { width = 0, height = 0 } = useWindowSize();
   const isClient = useIsClient();
+  const { width = 0, height = 0 } = useWindowSize();
 
   const bricksRef = useBricks(links.length);
   const paddleRef = usePaddle();
@@ -33,7 +33,6 @@ export default function Breakout({ children }: Props) {
     bricksRef,
     scoreRef,
     setGameOver,
-    width,
   });
 
   useGameLoop({
@@ -54,7 +53,7 @@ export default function Breakout({ children }: Props) {
   );
 
   return (
-    <div className="w-screen h-screen relative">
+    <div className="w-full h-full relative">
       <canvas
         ref={canvasRef}
         width={width}

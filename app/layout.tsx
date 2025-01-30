@@ -25,12 +25,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="w-screen h-screen">
+    <html lang="en" className="w-screen h-screen h-dvh">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased w-screen h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased w-full h-full`}
       >
         {/* <Header /> */}
         <Breakout>{children}</Breakout>

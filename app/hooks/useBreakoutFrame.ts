@@ -12,7 +12,6 @@ interface BreakoutFrameProps {
   bricksRef: MutableRefObject<Brick[]>;
   scoreRef: MutableRefObject<number>;
   setGameOver: (value: boolean) => void;
-  width: number;
 }
 
 export function useBreakoutFrame({
@@ -22,9 +21,8 @@ export function useBreakoutFrame({
   bricksRef,
   scoreRef,
   setGameOver,
-  width,
 }: BreakoutFrameProps) {
-  const { height = 0 } = useWindowSize();
+  const { width = 0, height = 0 } = useWindowSize();
   const BASE_SPEED = 7;
 
   function handleBrickCollisions() {
