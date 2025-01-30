@@ -14,7 +14,7 @@ export function usePaddle() {
   const paddleRef = useRef<Paddle>({
     x: width / 2 - 50,
     y: height - 50,
-    width: width / 10,
+    width: width < 1000 ? width / 5 : width / 10,
     height: 20,
     moveTo(targetX: number, canvasWidth: number) {
       this.x = Math.max(0, Math.min(canvasWidth - this.width, targetX));

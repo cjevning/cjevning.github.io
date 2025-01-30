@@ -6,7 +6,7 @@ const experience = [
     start: "May 2021",
     end: "November 2024",
     stack: [
-      "JavaScript",
+      "TypeScript",
       "React.js",
       "Node.js",
       "HTML",
@@ -24,7 +24,7 @@ const experience = [
     start: "October 2018",
     end: "April 2021",
     stack: [
-      "JavaScript",
+      "TypeScript",
       "React.js",
       "Node.js",
       "HTML",
@@ -45,6 +45,7 @@ const experience = [
       "JavaScript",
       "React.js",
       "Node.js",
+      "Express",
       "HTML",
       "CSS-in-JS",
       "REST",
@@ -53,7 +54,7 @@ const experience = [
     ],
   },
   {
-    title: "CTO",
+    title: "Chief Technology Officer",
     company: "Synocate",
     website: "https://synocate.com",
     start: "September 2015",
@@ -62,6 +63,7 @@ const experience = [
       "JavaScript",
       "React.js",
       "Node.js",
+      "Express",
       "HTML",
       "SCSS",
       "REST",
@@ -70,7 +72,7 @@ const experience = [
     ],
   },
   {
-    title: "Software Developer, Website Builder Apps",
+    title: "Software Dev, Website Builder",
     company: "GoDaddy",
     website: "https://www.godaddy.com/websites/website-builder",
     start: "July 2014",

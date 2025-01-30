@@ -60,29 +60,31 @@ export default function Breakout({ children }: Props) {
         height={height}
         className="w-full h-full"
       />
-      {links.map((link, index) => (
-        <Link
-          key={link}
-          href={link}
-          className="absolute flex items-center justify-center"
-          style={{
-            left: middleTopBricks[index].x,
-            top: middleTopBricks[index].y,
-            width: middleTopBricks[index].width,
-            height: middleTopBricks[index].height,
-          }}
-          onClick={() => {
-            const brick = middleTopBricks[index];
-            bricksRef.current = bricksRef.current.map((b) =>
-              b === brick ? { ...b, visible: false } : b
-            );
-            scoreRef.current += brick.points;
-          }}
-        >
-          {link.replace("/", "")}
-        </Link>
-      ))}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+      <nav>
+        {links.map((link, index) => (
+          <Link
+            key={link}
+            href={link}
+            className="absolute flex items-center justify-center"
+            style={{
+              left: middleTopBricks[index].x,
+              top: middleTopBricks[index].y,
+              width: middleTopBricks[index].width,
+              height: middleTopBricks[index].height,
+            }}
+            onClick={() => {
+              const brick = middleTopBricks[index];
+              bricksRef.current = bricksRef.current.map((b) =>
+                b === brick ? { ...b, visible: false } : b
+              );
+              scoreRef.current += brick.points;
+            }}
+          >
+            {link.replace("/", "")}
+          </Link>
+        ))}
+      </nav>
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full p-4 text-left text-sm md:text-base md:max-w-[600px]">
         {children}
       </div>
     </div>

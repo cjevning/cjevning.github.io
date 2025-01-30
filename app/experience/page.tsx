@@ -23,17 +23,17 @@ export default function Experience() {
   }, []);
 
   return (
-    <div className="container  p-6 rounded-lg border-4 border-purple-500">
+    <div className="container p-4 rounded-lg border-2 border-purple-500">
       {/* Navigation links */}
-      <nav className="mb-6 flex flex-wrap gap-2">
+      <nav className="mb-4 flex flex-wrap gap-1.5">
         {experience.map((job) => (
           <a
             key={job.company.toLowerCase()}
             href={`#${job.company.toLowerCase()}`}
-            className={`px-4 py-2 border-2 transition-all duration-200 ${
+            className={`px-3 py-1.5 border transition-colors duration-150 font-pixel text-sm ${
               selectedJob === job.company.toLowerCase()
-                ? "border-yellow-400 bg-yellow-400 text-black font-pixel font-bold transform scale-105"
-                : "border-purple-400 text-purple-400 hover:border-yellow-400 hover:text-yellow-400 hover:scale-105"
+                ? "border-yellow-400 bg-yellow-400 text-black"
+                : "border-purple-400 text-purple-400 hover:border-yellow-400 hover:text-yellow-400"
             }`}
           >
             {`${job.company} '${job.end.slice(-2)}`}
@@ -42,22 +42,22 @@ export default function Experience() {
       </nav>
 
       {/* Only show selected experience section */}
-      <main className="space-y-8">
+      <main className="space-y-4">
         {experience.map((job) => (
           <section
             key={job.company.toLowerCase()}
             id={job.company.toLowerCase()}
-            className={`scroll-mt-4 p-6 border-2 border-cyan-500 rounded-lg transform transition-all duration-300 ${
+            className={`scroll-mt-4 p-4 border border-cyan-500 rounded transition-opacity duration-200 ${
               selectedJob === job.company.toLowerCase()
-                ? "block scale-100 opacity-100"
-                : "hidden scale-95 opacity-0"
+                ? "block opacity-100"
+                : "hidden opacity-0"
             }`}
             aria-hidden={selectedJob !== job.company.toLowerCase()}
           >
-            <h2 className="text-2xl font-bold text-cyan-400 mb-2">
+            <h2 className="text-xl font-pixel text-cyan-400 mb-1">
               {job.title}
             </h2>
-            <h3 className="text-xl mb-2">
+            <h3 className="text-lg mb-1">
               <a
                 href={job.website}
                 className="text-purple-400 hover:text-purple-300 transition-colors"
@@ -65,16 +65,16 @@ export default function Experience() {
                 {job.company}
               </a>
             </h3>
-            <p className="text-gray-400 mb-4">
+            <p className="text-gray-400 text-sm mb-3">
               {job.start} - {job.end}
             </p>
-            <div className="mt-4">
-              <h4 className="font-medium text-yellow-400 mb-3">Tech Stack:</h4>
-              <ul className="flex flex-wrap gap-3">
+            <div>
+              <h4 className="font-pixel text-yellow-400 mb-2">Stack:</h4>
+              <ul className="flex flex-wrap gap-2">
                 {job.stack.map((tech) => (
                   <li
                     key={tech}
-                    className="bg-purple-700 px-3 py-1.5 rounded border border-purple-400 text-purple-100 shadow-lg hover:transform hover:scale-105 transition-transform cursor-pointer"
+                    className="bg-purple-900 px-2 py-1 text-sm rounded-sm border border-purple-400 text-purple-100"
                   >
                     {tech}
                   </li>
