@@ -25,6 +25,8 @@ export function useBall() {
   const { width = 0, height = 0 } = useWindowSize();
   const BALL_RADIUS = Math.min(width / 25, 15);
 
+  const BALL_SPEED = width < 640 ? 5 : 7;
+
   const calculateHitbox = (position: Point): Hitbox => {
     const cornerOffset = BALL_RADIUS * 0.707;
     return {
@@ -46,8 +48,8 @@ export function useBall() {
   const ballRef = useRef<Ball>({
     x: initialPosition.x,
     y: initialPosition.y,
-    dx: 7,
-    dy: -7,
+    dx: BALL_SPEED,
+    dy: -BALL_SPEED,
     radius: BALL_RADIUS,
     hitbox: calculateHitbox(initialPosition),
     calculateHitbox,

@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useIsClient, useWindowSize } from "usehooks-ts";
 import { MAX_BRICK_POINTS, useBricks } from "./hooks/useBricks";
 import { useBall } from "./hooks/useBall";
@@ -44,6 +44,33 @@ export default function Breakout({ children }: Props) {
     isRunning: !gameOver,
     drawGame: drawFrame,
   });
+
+  useEffect(() => {
+    if (canvasRef.current) {
+      const canvas = canvasRef.current!;
+      const ctx = canvas.getContext("2d")!;
+
+      const ratio =
+        typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1;
+
+      // get current size of the canvas
+      const rect = canvas.getBoundingClientRect();
+
+      // get width and height
+      const { width, height } = rect;
+      console.log(ratio);
+
+      canvas.width = width * ratio;
+      canvas.height = height * ratio;
+
+      // 2. Force it to display at the original (logical) size with CSS or style attributes
+      canvas.style.width = width + "px";
+      canvas.style.height = height + "px";
+
+      // 3. Scale the context so you can draw on it without considering the ratio.
+      ctx.scale(ratio, ratio);
+    }
+  }, []);
 
   if (!isClient) {
     return null;

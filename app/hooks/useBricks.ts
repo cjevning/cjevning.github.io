@@ -18,14 +18,20 @@ export interface Brick {
 }
 
 export function useBricks(minCols = 3) {
-  const { width = 0 } = useWindowSize();
+  const { width = 0, height = 0 } = useWindowSize();
   const bricksRef = useRef<Brick[]>([]);
 
   useEffect(() => {
     const BRICK_COLS =
-      width < 500 ? minCols : width < 1000 ? minCols + 2 : minCols + 6;
+      width < 640
+        ? minCols
+        : width < 1024
+        ? minCols + 2
+        : width < 1280
+        ? minCols + 4
+        : minCols + 6;
     const BRICK_WIDTH = (width * 0.95) / BRICK_COLS;
-    const BRICK_HEIGHT = BRICK_WIDTH * 0.25;
+    const BRICK_HEIGHT = Math.min(BRICK_WIDTH * 0.25, height * 0.05);
     const BRICK_PADDING = (width * 0.05) / (BRICK_COLS + 1);
     const BRICK_OFFSET_TOP = BRICK_PADDING;
 
@@ -45,7 +51,7 @@ export function useBricks(minCols = 3) {
     }
 
     bricksRef.current = bricks;
-  }, [width, minCols]);
+  }, [width, height, minCols]);
 
   return bricksRef;
 }
