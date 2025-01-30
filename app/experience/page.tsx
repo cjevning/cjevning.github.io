@@ -70,11 +70,11 @@ export default function Experience() {
             </p>
             <div>
               <h4 className="font-pixel text-yellow-400 mb-2">Stack:</h4>
-              <ul className="flex flex-wrap gap-2">
+              <ul className="flex flex-wrap-reverse justify-between gap-2">
                 {job.stack.map((tech) => (
                   <li
                     key={tech}
-                    className="bg-purple-900 px-2 py-1 text-sm rounded-sm border border-purple-400 text-purple-100"
+                    className="bg-purple-900 px-2 py-1 text-sm rounded-sm border basis-[45%] border-purple-400 text-purple-100"
                   >
                     {tech}
                   </li>

@@ -106,15 +106,17 @@ export default function Breakout({ children }: Props) {
             }}
             onClick={() => {
               const brick = middleTopBricks[index];
-              bricksRef.current = bricksRef.current.map((b) =>
-                b === brick ? { ...b, visible: false } : b
-              );
-              scoreRef.current += brick.points;
-              addIndicator(
-                brick.x + brick.width / 2,
-                brick.y + brick.height / 2,
-                brick.points
-              );
+              if (brick.visible) {
+                scoreRef.current += brick.points;
+                addIndicator(
+                  brick.x + brick.width / 2,
+                  brick.y + brick.height / 2,
+                  brick.points
+                );
+                bricksRef.current = bricksRef.current.map((b) =>
+                  b === brick ? { ...b, visible: false } : b
+                );
+              }
             }}
           >
             {link.replace("/", "")}
